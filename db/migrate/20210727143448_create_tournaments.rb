@@ -6,6 +6,8 @@ class CreateTournaments < ActiveRecord::Migration[6.1]
       t.string :tournament_remote_id
       t.string :event_remote_id
       t.integer :remote_participant_count
+      t.references :rankings, foreign_key: true
+
       t.datetime :dated_at
 
       t.timestamps
