@@ -1,0 +1,2 @@
+class TierList < ApplicationRecord
+end
