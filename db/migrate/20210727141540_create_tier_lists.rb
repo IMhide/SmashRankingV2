@@ -11,7 +11,7 @@ class CreateTierLists < ActiveRecord::Migration[6.1]
       t.float :b_coef, null: false
       t.integer :c_min, null: false
       t.float :c_coef, null: false
-      t.references :rankings, foreign_key: true
+      t.references :ranking, foreign_key: true
 
       t.timestamps
     end

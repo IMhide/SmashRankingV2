@@ -1,5 +1,5 @@
 ActiveAdmin.register Tournament do
-  permit_params :name, :slug, :tournament_remote_id, :event_remote_id, :remote_participant_count, :rankings_id,
+  permit_params :name, :slug, :tournament_remote_id, :event_remote_id, :remote_participant_count, :ranking_id,
                 :dated_at
 
   index do

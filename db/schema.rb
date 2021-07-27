@@ -58,10 +58,10 @@ ActiveRecord::Schema.define(version: 2021_07_27_143448) do
     t.float "b_coef", null: false
     t.integer "c_min", null: false
     t.float "c_coef", null: false
-    t.bigint "rankings_id"
+    t.bigint "ranking_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["rankings_id"], name: "index_tier_lists_on_rankings_id"
+    t.index ["ranking_id"], name: "index_tier_lists_on_ranking_id"
   end
 
   create_table "tournaments", force: :cascade do |t|
@@ -70,13 +70,13 @@ ActiveRecord::Schema.define(version: 2021_07_27_143448) do
     t.string "tournament_remote_id"
     t.string "event_remote_id"
     t.integer "remote_participant_count"
-    t.bigint "rankings_id"
+    t.bigint "ranking_id"
     t.datetime "dated_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["rankings_id"], name: "index_tournaments_on_rankings_id"
+    t.index ["ranking_id"], name: "index_tournaments_on_ranking_id"
   end
 
-  add_foreign_key "tier_lists", "rankings", column: "rankings_id"
-  add_foreign_key "tournaments", "rankings", column: "rankings_id"
+  add_foreign_key "tier_lists", "rankings"
+  add_foreign_key "tournaments", "rankings"
 end
