@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_27_141228) do
+ActiveRecord::Schema.define(version: 2021_07_27_141540) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,4 +47,22 @@ ActiveRecord::Schema.define(version: 2021_07_27_141228) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "tier_lists", force: :cascade do |t|
+    t.integer "ss_min", null: false
+    t.float "ss_coef", null: false
+    t.integer "s_min", null: false
+    t.float "s_coef", null: false
+    t.integer "a_min", null: false
+    t.float "a_coef", null: false
+    t.integer "b_min", null: false
+    t.float "b_coef", null: false
+    t.integer "c_min", null: false
+    t.float "c_coef", null: false
+    t.bigint "rankings_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["rankings_id"], name: "index_tier_lists_on_rankings_id"
+  end
+
+  add_foreign_key "tier_lists", "rankings", column: "rankings_id"
 end
