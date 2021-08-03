@@ -44,6 +44,7 @@ ActiveAdmin.register Tournament do
 
     table_for SmashGg::GetEventsByTournamentId.call(slug: resource.slug) do
       column :name
+      column :participants_count
       column :link do |e|
         link_to 'Lien', "https://smash.gg/#{e.slug}", target: :blank
       end

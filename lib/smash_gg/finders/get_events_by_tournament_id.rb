@@ -1,12 +1,13 @@
 module SmashGg
   class GetEventsByTournamentId < BaseFinder
-    EventStruct = Struct.new(:event_remote_id, :name, :slug)
+    EventStruct = Struct.new(:event_remote_id, :name, :slug, :participants_count)
     TournamentQuery = GraphClient.parse <<-'GRAPHQL'
     query($slug: String!) {
       tournament(slug: $slug) {
         events {
           id
           name
+          numEntrants
           slug
         }
       }
@@ -21,7 +22,7 @@ module SmashGg
 
     def self.format(events)
       events.map do |hash|
-        EventStruct.new(hash['id'], hash['name'], hash['slug'])
+        EventStruct.new(hash['id'], hash['name'], hash['slug'], hash['numEntrants'])
       end
     end
   end
