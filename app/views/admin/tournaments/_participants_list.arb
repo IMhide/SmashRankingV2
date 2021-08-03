@@ -1,0 +1,13 @@
+columns do
+  column do
+    panel 'Liste des participants' do
+      table_for resource.participations.order(:placement) do
+        column :player
+        column :placement
+        column :seed
+        column :verified
+        column :dq
+      end
+    end
+  end
+end

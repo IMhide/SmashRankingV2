@@ -1,0 +1,19 @@
+columns do
+  column do
+    panel 'Events disponible' do
+      table_for SmashGg::GetEventsByTournamentId.call(slug: resource.slug) do
+        column :name
+        column "Nombre d'inscrit" do |e|
+          e.participants_count
+        end
+        column :smash_gg do |e|
+          link_to 'Lien', "https://smash.gg/#{e.slug}", target: :blank
+        end
+        column :action do |e|
+          link_to 'Choisir cet event', add_event_admin_tournament_path(remote_event_id: e.event_remote_id),
+                  method: :post
+        end
+      end
+    end
+  end
+end
