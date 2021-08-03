@@ -23,12 +23,18 @@ ActiveAdmin.register Tournament do
   collection_action :create_by_url, method: :post do
     tournament = CreateTournamentBySlug.new(tournament: Tournament.new(resource_params.first)).call
     if tournament
-      flash[:notice] = 'Ca marche'
+      flash[:notice] = 'Tournois ajouté'
       redirect_to admin_tournament_path(tournament)
     else
       flash[:error] = 'Le tournois fourni est invalide'
       redirect_to add_by_url_admin_tournaments_path
     end
+  end
+
+  member_action :add_event, method: :post do
+    SyncTournamentEvent.new(tournament: resource, remote_event_id: params[:remote_event_id]).call
+    flash[:notice] = 'Event synchronisé'
+    redirect_to admin_tournament_path(resource)
   end
 
   show do
@@ -42,15 +48,10 @@ ActiveAdmin.register Tournament do
       row :created_at
     end
 
-    table_for SmashGg::GetEventsByTournamentId.call(slug: resource.slug) do
-      column :name
-      column :participants_count
-      column :link do |e|
-        link_to 'Lien', "https://smash.gg/#{e.slug}", target: :blank
-      end
-      column :action do
-        link_to 'Choisir cet event', '#'
-      end
+    if resource.event_remote_id.nil?
+      render 'events_list', { resource: resource }
+    else
+      render 'participants_list', { resource: resource }
     end
   end
 

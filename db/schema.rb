@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 2021_08_03_185517) do
     t.integer "placement", null: false
     t.integer "seed", null: false
     t.boolean "verified"
+    t.boolean "dq"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["player_id"], name: "index_participations_on_player_id"

@@ -6,6 +6,7 @@ class CreateParticipations < ActiveRecord::Migration[6.1]
       t.integer :placement, null: false
       t.integer :seed, null: false
       t.boolean :verified
+      t.boolean :dq
 
       t.timestamps
     end
