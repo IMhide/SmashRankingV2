@@ -10,9 +10,14 @@ module SmashRankingV2
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
 
+    # Setup rspec generators
     config.generators do |g|
       g.test_framework :rspec
     end
+
+    # Load Lib
+    config.autoload_paths << Rails.root.join('lib')
+    config.eager_load_paths << Rails.root.join('lib')
 
     # Configuration for the application, engines, and railties goes here.
     #
