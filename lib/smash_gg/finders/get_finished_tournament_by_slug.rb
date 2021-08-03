@@ -1,5 +1,3 @@
-require_relative 'base_finder'
-
 module SmashGg
   class GetFinishedTournamentBySlug < BaseFinder
     TournamentQuery = GraphClient.parse <<-'GRAPHQL'
@@ -7,7 +5,6 @@ module SmashGg
       tournament(slug: $slug) {
         id
         name
-        slug
         startAt
         state
       }
@@ -19,13 +16,16 @@ module SmashGg
       format(result) unless result.nil?
     end
 
+    # Returning
+    # {"name"=> String, "tournament_remote_id"=> INT:SGGID, "dated_at"=> DateTime}
     def self.format(hash)
       if hash['state'] != 3
         {}
       else
         new_hash = hash.dup
-        new_hash[:remote_id] = new_hash.delete('id')
+        new_hash[:tournament_remote_id] = new_hash.delete('id')
         new_hash[:dated_at] = Time.at(new_hash.delete('startAt')).to_datetime
+        new_hash.delete('state')
         new_hash.with_indifferent_access
       end
     end
