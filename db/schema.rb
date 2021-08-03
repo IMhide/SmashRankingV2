@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_03_185152) do
+ActiveRecord::Schema.define(version: 2021_08_03_185517) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,18 @@ ActiveRecord::Schema.define(version: 2021_08_03_185152) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_admin_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
+  end
+
+  create_table "participations", force: :cascade do |t|
+    t.bigint "tournament_id"
+    t.bigint "player_id"
+    t.integer "placement", null: false
+    t.integer "seed", null: false
+    t.boolean "verified"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["player_id"], name: "index_participations_on_player_id"
+    t.index ["tournament_id"], name: "index_participations_on_tournament_id"
   end
 
   create_table "players", force: :cascade do |t|
@@ -85,6 +97,8 @@ ActiveRecord::Schema.define(version: 2021_08_03_185152) do
     t.index ["ranking_id"], name: "index_tournaments_on_ranking_id"
   end
 
+  add_foreign_key "participations", "players"
+  add_foreign_key "participations", "tournaments"
   add_foreign_key "tier_lists", "rankings"
   add_foreign_key "tournaments", "rankings"
 end
