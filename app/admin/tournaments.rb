@@ -30,4 +30,23 @@ ActiveAdmin.register Tournament do
       redirect_to add_by_url_admin_tournaments_path
     end
   end
+
+  show do
+    attributes_table do
+      row :name
+      row :ranking
+      row :dated_at
+      row :link do |t|
+        link_to 'Lien', "https://smash.gg/#{t.slug}", target: :blank
+      end
+      row :created_at
+    end
+  end
+
+  sidebar 'Dev informations', only: :show do
+    attributes_table do
+      row :tournament_remote_id
+      row :event_remote_id
+    end
+  end
 end
