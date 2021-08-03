@@ -37,9 +37,19 @@ ActiveAdmin.register Tournament do
       row :ranking
       row :dated_at
       row :link do |t|
-        link_to 'Lien', "https://smash.gg/#{t.slug}", target: :blank
+        link_to 'Lien', "https://smash.gg/tournament/#{t.slug}", target: :blank
       end
       row :created_at
+    end
+
+    table_for SmashGg::GetEventsByTournamentId.call(slug: resource.slug) do
+      column :name
+      column :link do |e|
+        link_to 'Lien', "https://smash.gg/#{e.slug}", target: :blank
+      end
+      column :action do
+        link_to 'Choisir cet event', '#'
+      end
     end
   end
 
