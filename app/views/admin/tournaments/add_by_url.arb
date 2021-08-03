@@ -1,0 +1,10 @@
+active_admin_form_for [:admin, Tournament.new], url: create_by_url_admin_tournaments_path do |f|
+  columns do
+    column do
+      f.inputs 'SmashGG Tournament slug' do
+        f.input :slug, hint: "https://smash.gg/league/XXXXX/details ne mettre que le XXX de l'url SmashGG"
+      end
+    end
+    f.submit
+  end
+end
