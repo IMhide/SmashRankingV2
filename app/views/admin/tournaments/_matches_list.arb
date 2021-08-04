@@ -1,0 +1,13 @@
+columns do
+  column do
+    panel 'Liste des matches' do
+      table_for matches.order(:completed_at) do
+        column :winner
+        column :winner_score
+        column :looser_score
+        column :looser
+        column :completed_at
+      end
+    end
+  end
+end

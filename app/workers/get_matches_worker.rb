@@ -6,9 +6,9 @@ class GetMatchesWorker
     ActiveRecord::Base.transaction do
       actions(remote_event_id: remote_event_id)
     end
-    tournament.update(match_sync: :success)
+    @tournament.update(match_sync: :success)
   rescue Exception => e
-    tournament.update(match_sync: :failure)
+    @tournament.update(match_sync: :failure)
     raise e
   end
 
@@ -26,8 +26,8 @@ class GetMatchesWorker
     looser_slot = match['slots'].find { |s| s['entrant']['id'] != match['winnerId'] }
 
     {
-      winner_id: Player.find_by(remote_id: slot_player_remote_id(winner_slot)).pluck(:id),
-      looser_id: Player.find_by(remote_id: slot_player_remote_id(looser_slot)).pluck(:id),
+      winner_id: Player.select(:id).find_by(remote_id: slot_player_remote_id(winner_slot)).id,
+      looser_id: Player.select(:id).find_by(remote_id: slot_player_remote_id(looser_slot)).id,
       winner_score: slot_score(winner_slot),
       looser_score: slot_score(looser_slot),
       tournament_id: @tournament.id,

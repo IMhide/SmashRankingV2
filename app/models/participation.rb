@@ -4,5 +4,4 @@ class Participation < ApplicationRecord
 
   belongs_to :player, inverse_of: :participations
   belongs_to :tournament, inverse_of: :participations
-  has_many :matches, inverse_of: :participation
 end

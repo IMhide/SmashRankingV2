@@ -42,6 +42,7 @@ ActiveAdmin.register Tournament do
       row :name
       row :ranking
       row :dated_at
+      row :match_sync
       row :link do |t|
         link_to 'Lien', "https://smash.gg/tournament/#{t.slug}", target: :blank
       end
@@ -53,6 +54,8 @@ ActiveAdmin.register Tournament do
     else
       render 'participants_list', { resource: resource }
     end
+
+    render 'matches_list', { matches: resource.matches } if resource.match_sync.success?
   end
 
   sidebar 'Dev informations', only: :show do
