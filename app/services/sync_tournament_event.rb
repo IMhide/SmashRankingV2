@@ -7,7 +7,10 @@ class SyncTournamentEvent < BaseService
   def call
     @tournament.update(event_remote_id: @remote_event_id)
     sync_standings
+    sync_matches
   end
+
+  private
 
   def sync_standings
     SmashGg::GetEventStandings.new(event_remote_id: @remote_event_id).call.each do |standing|
@@ -20,5 +23,10 @@ class SyncTournamentEvent < BaseService
     Player.find_by(remote_id: standing[:player_id]) ||
       Player.create!(name: standing[:player_name],
                      team: standing[:player_team], remote_id: standing[:player_id])
+  end
+
+  def sync_matches
+    @tournament.update(match_sync: :running)
+    GetMatchesWorker.perform_async(@tournament.id, @remote_event_id)
   end
 end
