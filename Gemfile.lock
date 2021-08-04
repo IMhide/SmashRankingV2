@@ -129,6 +129,8 @@ GEM
       warden (~> 1.2.3)
     diff-lcs (1.4.4)
     docile (1.4.0)
+    enumerize (2.4.0)
+      activesupport (>= 3.2)
     equalizer (0.0.11)
     erubi (1.10.0)
     erubis (2.7.0)
@@ -406,6 +408,7 @@ DEPENDENCIES
   capybara (>= 3.26)
   database_cleaner
   devise
+  enumerize
   factory_bot_rails
   figaro
   graphql-client
