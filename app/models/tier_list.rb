@@ -11,4 +11,16 @@ class TierList < ApplicationRecord
   validates :c_min, presence: true
 
   belongs_to :ranking, inverse_of: :tier_list
+
+  def format; end
+
+  def find_tier(count)
+    return :SS if count > ss_min
+    return :S if count > s_min
+    return :A if count > a_min
+    return :B if count > b_min
+    return :C if count > c_min
+
+    :none
+  end
 end
