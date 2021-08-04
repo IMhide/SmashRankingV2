@@ -111,6 +111,7 @@ GEM
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
     concurrent-ruby (1.1.9)
+    connection_pool (2.2.5)
     crass (1.0.6)
     database_cleaner (2.0.1)
       database_cleaner-active_record (~> 2.0.0)
@@ -266,6 +267,7 @@ GEM
     rb-fsevent (0.11.0)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
+    redis (4.4.0)
     reek (6.0.4)
       kwalify (~> 0.7.0)
       parser (~> 3.0.0)
@@ -338,6 +340,10 @@ GEM
       rubyzip (>= 1.2.2)
     semantic_range (3.0.0)
     sexp_processor (4.15.3)
+    sidekiq (6.2.1)
+      connection_pool (>= 2.2.2)
+      rack (~> 2.0)
+      redis (>= 4.2.0)
     simplecov (0.21.2)
       docile (~> 1.1)
       simplecov-html (~> 0.11)
@@ -417,6 +423,7 @@ DEPENDENCIES
   rubycritic
   sass-rails (>= 6)
   selenium-webdriver
+  sidekiq
   simplecov
   standard
   web-console (>= 4.1.0)

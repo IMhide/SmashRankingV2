@@ -14,6 +14,7 @@ gem 'rails', '~> 6.1.4'
 gem 'sass-rails', '>= 6'
 gem 'webpacker', '~> 5.0'
 gem 'light_admin', git: 'git@github.com:CapSens/light_admin.git'
+gem 'sidekiq'
 
 
 group :development, :test do
