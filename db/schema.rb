@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_04_094340) do
+ActiveRecord::Schema.define(version: 2021_08_04_105131) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,22 @@ ActiveRecord::Schema.define(version: 2021_08_04_094340) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_admin_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
+  end
+
+  create_table "matches", force: :cascade do |t|
+    t.bigint "winner_id", null: false
+    t.bigint "looser_id", null: false
+    t.bigint "participation_id", null: false
+    t.bigint "tournament_id", null: false
+    t.integer "winner_score"
+    t.integer "looser_score"
+    t.datetime "completed_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["looser_id"], name: "index_matches_on_looser_id"
+    t.index ["participation_id"], name: "index_matches_on_participation_id"
+    t.index ["tournament_id"], name: "index_matches_on_tournament_id"
+    t.index ["winner_id"], name: "index_matches_on_winner_id"
   end
 
   create_table "participations", force: :cascade do |t|
@@ -99,6 +115,10 @@ ActiveRecord::Schema.define(version: 2021_08_04_094340) do
     t.index ["ranking_id"], name: "index_tournaments_on_ranking_id"
   end
 
+  add_foreign_key "matches", "participations"
+  add_foreign_key "matches", "players", column: "looser_id"
+  add_foreign_key "matches", "players", column: "winner_id"
+  add_foreign_key "matches", "tournaments"
   add_foreign_key "participations", "players"
   add_foreign_key "participations", "tournaments"
   add_foreign_key "tier_lists", "rankings"
