@@ -12,7 +12,6 @@
 @import 'active_admin/base';
 @import 'light_admin/base';
 
-// Overriding any non-variable Sass must be done after the fact.
-// For example, to change the default status-tag color:
-//
-//   .status_tag { background: #6090DB; }
+//LightAdmin sidebar monkey patch
+
+.sidebar_section .attributes_table th { min-width: 0 }
