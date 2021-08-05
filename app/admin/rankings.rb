@@ -1,7 +1,7 @@
 ActiveAdmin.register Ranking do
   permit_params :name
 
-  sidebar 'Tier List' do
+  sidebar 'Tier List', only: :show do
     attributes_table_for resource.tier_list do
       row :ss_coef
       row :s_coef
@@ -16,7 +16,9 @@ ActiveAdmin.register Ranking do
       column do
         panel 'Tournois' do
           table_for resource.tournaments do
-            column :name
+            column :name do |t|
+              link_to t.name, admin_tournament_path(t)
+            end
             column :dated_at
             column :tier
             column :match_sync
@@ -28,5 +30,12 @@ ActiveAdmin.register Ranking do
         end
       end
     end
+  end
+
+  member_action :calculate_rating, method: :post do
+    @ranking.update(compute_state: :running)
+    ComputeRatingWorker.perform(resource.id)
+    flash[:notice] = 'Calcule du PR programmé'
+    redirect_to admin_ranking_path(resource.id)
   end
 end
