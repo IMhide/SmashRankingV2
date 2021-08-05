@@ -6,17 +6,17 @@ ruby '2.7.2'
 gem 'activeadmin'
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'devise'
+gem 'enumerize'
 gem 'graphql-client'
 gem 'jbuilder', '~> 2.7'
+gem 'light_admin', git: 'git@github.com:CapSens/light_admin.git'
 gem 'pg'
 gem 'puma', '~> 5.0'
 gem 'rails', '~> 6.1.4'
 gem 'sass-rails', '>= 6'
-gem 'webpacker', '~> 5.0'
-gem 'light_admin', git: 'git@github.com:CapSens/light_admin.git'
 gem 'sidekiq'
-gem 'enumerize'
-
+gem 'trueskill', github: 'saulabs/trueskill', require: 'saulabs/trueskill'
+gem 'webpacker', '~> 5.0'
 
 group :development, :test do
   gem 'brakeman'

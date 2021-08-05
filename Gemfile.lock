@@ -5,6 +5,12 @@ GIT
     light_admin (1.0.5)
       activeadmin (>= 1.1.0, < 3.0)
 
+GIT
+  remote: https://github.com/saulabs/trueskill.git
+  revision: d15b0752cb4be5ff27f26e5dbbac520680446355
+  specs:
+    trueskill (1.0.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -429,6 +435,7 @@ DEPENDENCIES
   sidekiq
   simplecov
   standard
+  trueskill!
   web-console (>= 4.1.0)
   webdrivers
   webpacker (~> 5.0)
