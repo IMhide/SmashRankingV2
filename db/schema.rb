@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_05_125416) do
+ActiveRecord::Schema.define(version: 2021_08_05_133637) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,6 +83,20 @@ ActiveRecord::Schema.define(version: 2021_08_05_125416) do
     t.string "compute_state"
   end
 
+  create_table "ratings", force: :cascade do |t|
+    t.bigint "match_id", null: false
+    t.bigint "ranking_id", null: false
+    t.bigint "player_id", null: false
+    t.boolean "base", default: false, null: false
+    t.decimal "mean", precision: 6, scale: 4, null: false
+    t.decimal "deviation", precision: 6, scale: 4, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["match_id"], name: "index_ratings_on_match_id"
+    t.index ["player_id"], name: "index_ratings_on_player_id"
+    t.index ["ranking_id"], name: "index_ratings_on_ranking_id"
+  end
+
   create_table "tier_lists", force: :cascade do |t|
     t.integer "ss_min", null: false
     t.float "ss_coef", null: false
@@ -120,6 +134,9 @@ ActiveRecord::Schema.define(version: 2021_08_05_125416) do
   add_foreign_key "matches", "tournaments"
   add_foreign_key "participations", "players"
   add_foreign_key "participations", "tournaments"
+  add_foreign_key "ratings", "matches"
+  add_foreign_key "ratings", "players"
+  add_foreign_key "ratings", "rankings"
   add_foreign_key "tier_lists", "rankings"
   add_foreign_key "tournaments", "rankings"
 end
