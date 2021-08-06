@@ -15,11 +15,11 @@ class TierList < ApplicationRecord
   def format; end
 
   def find_tier(count)
-    return :SS if count > ss_min
-    return :S if count > s_min
-    return :A if count > a_min
-    return :B if count > b_min
-    return :C if count > c_min
+    return :SS if count >= ss_min
+    return :S if count >= s_min
+    return :A if count >= a_min
+    return :B if count >= b_min
+    return :C if count >= c_min
 
     :none
   end
