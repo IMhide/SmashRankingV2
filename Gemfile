@@ -26,9 +26,10 @@ group :development, :test do
   gem 'pry'
   gem 'pry-byebug'
   gem 'pry-rails'
+  gem 'rubocop', require: false
+  gem 'rubocop-performance', require: false
   gem 'rubycritic', require: false
   gem 'simplecov'
-  gem 'standard'
 end
 
 group :development do

@@ -365,9 +365,6 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    standard (1.1.5)
-      rubocop (= 1.18.3)
-      rubocop-performance (= 1.11.4)
     thor (1.1.0)
     thread_safe (0.3.6)
     tilt (2.0.10)
@@ -429,12 +426,13 @@ DEPENDENCIES
   rack-mini-profiler (~> 2.0)
   rails (~> 6.1.4)
   rspec-rails
+  rubocop
+  rubocop-performance
   rubycritic
   sass-rails (>= 6)
   selenium-webdriver
   sidekiq
   simplecov
-  standard
   trueskill!
   web-console (>= 4.1.0)
   webdrivers
