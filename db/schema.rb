@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_06_132559) do
+ActiveRecord::Schema.define(version: 2021_08_06_164027) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -82,6 +82,8 @@ ActiveRecord::Schema.define(version: 2021_08_06_132559) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "compute_state"
     t.jsonb "standing"
+    t.bigint "previous_season_id"
+    t.index ["previous_season_id"], name: "index_rankings_on_previous_season_id"
   end
 
   create_table "ratings", force: :cascade do |t|
@@ -135,6 +137,7 @@ ActiveRecord::Schema.define(version: 2021_08_06_132559) do
   add_foreign_key "matches", "tournaments"
   add_foreign_key "participations", "players"
   add_foreign_key "participations", "tournaments"
+  add_foreign_key "rankings", "rankings", column: "previous_season_id"
   add_foreign_key "ratings", "matches"
   add_foreign_key "ratings", "players"
   add_foreign_key "ratings", "rankings"

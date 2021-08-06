@@ -1,5 +1,5 @@
 ActiveAdmin.register Ranking do
-  permit_params :name
+  permit_params :name, :previous_season_id
 
   sidebar 'Tier List', only: :show do
     attributes_table_for resource.tier_list do
