@@ -15,7 +15,7 @@ ActiveAdmin.register Ranking do
     columns do
       column do
         panel 'Tournois' do
-          table_for resource.tournaments do
+          table_for resource.tournaments.order(:dated_at) do
             column :name do |t|
               link_to t.name, admin_tournament_path(t)
             end
