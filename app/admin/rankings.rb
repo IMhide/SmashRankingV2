@@ -33,9 +33,13 @@ ActiveAdmin.register Ranking do
   end
 
   member_action :calculate_rating, method: :post do
-    @ranking.update(compute_state: :running)
-    ComputeRatingWorker.perform(resource.id)
+    resource.update(compute_state: :running)
+    ComputeRatingWorker.perform_async(resource.id)
     flash[:notice] = 'Calcule du PR programmé'
     redirect_to admin_ranking_path(resource.id)
+  end
+
+  action_item :calculate_rating, only: :show do
+    link_to 'Calculer le ranking', calculate_rating_admin_ranking_path(resource), method: :post
   end
 end
