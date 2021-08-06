@@ -1,5 +1,4 @@
 class Rating < ApplicationRecord
-  validates :base, presence: true
   validates :mean, presence: true
   validates :deviation, presence: true
 

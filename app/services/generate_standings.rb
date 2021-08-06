@@ -6,23 +6,23 @@ class GenerateStandings < BaseService
   def call
     result = sql_call
     result = set_score(result)
-    @ranking.update(standing: add_position)
+    @ranking.update(standing: add_position(result))
   end
 
   private
 
   def sql_call
-    sql = 'SELECT player_id, ranking_id, MAX(created_at) as created_at, COUNT(created_at) as match_count, FROM ratings GROUP BY player_id, ranking_id'
+    sql = 'SELECT player_id, ranking_id, MAX(created_at) as created_at, COUNT(created_at) as match_count FROM ratings GROUP BY player_id, ranking_id'
     sqlq = "SELECT ratings.mean, ratings.deviation, players.id, players.name, players.team, match_count\
     FROM (#{sql}) AS lastest_ratings\
     INNER JOIN ratings ON lastest_ratings.player_id = ratings.player_id AND lastest_ratings.created_at = ratings.created_at\
-    INNER JOIN players ON ratings.player_id = players.id WHERE ratings.circuit_id = #{@id}"
+    INNER JOIN players ON ratings.player_id = players.id WHERE ratings.ranking_id = #{@ranking.id}"
     ActiveRecord::Base.connection.execute(sqlq).to_a
   end
 
   def set_score(result)
     result.map do |hash|
-      hash.merge({ score: compute_score(hash['mean'], hash['deviation']) })
+      hash.merge({score: compute_score(hash['mean'], hash['deviation'])})
     end.sort { |a, b| b[:score] <=> a[:score] }
   end
 
@@ -34,7 +34,7 @@ class GenerateStandings < BaseService
     result.each_with_index.map do |h, i|
       h[:name] = [h['team'], h.delete('name')].compact.join(' | ') unless h['team'].blank?
       h.delete('team')
-      h.merge({ position: i + 1 }).with_indifferent_access
+      h.merge({position: i + 1}).with_indifferent_access
     end
   end
 end

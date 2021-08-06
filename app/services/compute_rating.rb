@@ -5,7 +5,7 @@ class ComputeRating < BaseService
 
   def call
     flush_result
-    Match.where(ranking_id: @ranking_id).order(:completed_at).each { |_match| rate_match(matcha) }
+    Match.joins(:tournament).where(tournament: {ranking_id: @ranking.id}).order(:completed_at).each { |match| rate_match(match) }
   end
 
   private
@@ -24,9 +24,9 @@ class ComputeRating < BaseService
     graph = Saulabs::TrueSkill::ScoreBasedBayesianRating.new(r_winner => match.winner_score.to_i,
       r_looser => match.looser_score.to_i)
     graph.update_skills
-    Rating.create!(ranking_id: @ranking.id, match_id: match.id, player_id: match_winner_id, mean: r_winner.first.mean,
+    Rating.create!(ranking_id: @ranking.id, match_id: match.id, player_id: match.winner_id, mean: r_winner.first.mean,
       deviation: r_winner.first.deviation)
-    Rating.create!(ranking_id: @ranking.id, match_id: match.id, player_id: match_looser_id, mean: r_looser.first.mean,
+    Rating.create!(ranking_id: @ranking.id, match_id: match.id, player_id: match.looser_id, mean: r_looser.first.mean,
       deviation: r_looser.first.deviation)
   end
 

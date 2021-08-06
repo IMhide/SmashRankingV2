@@ -8,4 +8,5 @@ class Match < ApplicationRecord
   validates :completed_at, presence: true
 
   has_many :ratings, inverse_of: :match
+  has_one :ranking, through: :tournament
 end
