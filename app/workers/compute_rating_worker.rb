@@ -12,5 +12,8 @@ class ComputeRatingWorker
     raise e
   end
 
-  def actions; end
+  def actions
+    ComputeRating.new(ranking: @ranking).call
+    GenerateStandings.new(ranking: @ranking).call
+  end
 end
