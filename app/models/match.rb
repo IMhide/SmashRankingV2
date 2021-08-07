@@ -7,6 +7,6 @@ class Match < ApplicationRecord
   validates :looser_score, presence: true
   validates :completed_at, presence: true
 
-  has_many :ratings, inverse_of: :match
+  has_many :ratings, inverse_of: :match, dependent: :destroy
   has_one :ranking, through: :tournament
 end
