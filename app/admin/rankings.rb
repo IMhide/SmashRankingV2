@@ -27,6 +27,12 @@ ActiveAdmin.register Ranking do
       end
       column do
         panel 'Classement' do
+          table_for resource.formated_standing do
+            column :position
+            column :name
+            column :score
+            column :match_count
+          end
         end
       end
     end
