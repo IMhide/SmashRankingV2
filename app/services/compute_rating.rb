@@ -16,14 +16,16 @@ class ComputeRating < BaseService
 
   def rate_match(match)
     winner_rating = player_rating(match.winner_id, match.id)
-    looser_rating = player_rating(match.winner_id, match.id)
+    looser_rating = player_rating(match.looser_id, match.id)
     coef = get_coef(match.tournament)
 
     r_winner = set_trueskill_ratings(winner_rating, coef)
     r_looser = set_trueskill_ratings(looser_rating, coef)
+
     graph = Saulabs::TrueSkill::ScoreBasedBayesianRating.new(r_winner => match.winner_score.to_i,
       r_looser => match.looser_score.to_i)
     graph.update_skills
+
     Rating.create!(ranking_id: @ranking.id, match_id: match.id, player_id: match.winner_id, mean: r_winner.first.mean,
       deviation: r_winner.first.deviation)
     Rating.create!(ranking_id: @ranking.id, match_id: match.id, player_id: match.looser_id, mean: r_looser.first.mean,
@@ -40,9 +42,9 @@ class ComputeRating < BaseService
     if !@ranking.previous_season_id.nil?
       params = Rating.where(player_id: player_id, ranking_id: @ranking.previous_season_id).order(created_at: :desc).first.attributes
       params['ranking_id'] = @ranking.id
+      params['deviation'] = BigDecimal(25 / 3)
       rating = Rating.create!(params.merge({base: true}))
     end
-
     rating || Rating.create!(player_id: player_id, match_id: match_id, ranking_id: @ranking.id, mean: BigDecimal('25'), deviation: BigDecimal(25 / 3), base: true)
   end
 
