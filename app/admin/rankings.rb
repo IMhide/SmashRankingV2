@@ -21,7 +21,9 @@ ActiveAdmin.register Ranking do
             end
             column :dated_at
             column :tier
-            column :match_sync
+            column :match_sync do |t|
+              status_tag(t.match_sync, class: t.sync_status_tag_class)
+            end
           end
         end
       end

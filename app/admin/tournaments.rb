@@ -43,7 +43,9 @@ ActiveAdmin.register Tournament do
       row :ranking
       row :dated_at
       row :tier
-      row :match_sync
+      row :match_sync do |t|
+        status_tag(t.match_sync, class: t.sync_status_tag_class)
+      end
       row :link do |t|
         link_to 'Lien', "https://smash.gg/tournament/#{t.slug}", target: :blank
       end

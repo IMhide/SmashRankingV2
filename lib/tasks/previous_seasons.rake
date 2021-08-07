@@ -11,9 +11,22 @@ namespace :previous_seasons do
     create_season(events_remote_id, 'Saison 1')
   end
 
-  def create_season(event_ids, season_name)
+  task season_two: :environment do
+    events_remote_ids = ['410371', '424771', '419944', '423833', '415554',
+      '389112', '407252', '415156', '415940', '400710',
+      '397600', '401564', '406216', '390703', '401454',
+      '364751', '382287', '392479', '379436', '379183',
+      '361698', '361570', '359584', '330146', '385378',
+      '370404', '365139', '340070', '377200', '359585',
+      '357251', '368911', '337699', '353692', '344190',
+      '365283', '334558', '362237', '352866', '359547',
+      '343932', '347376', '345256', '356620']
+    create_season(events_remote_ids, 'Saison 2', 1)
+  end
+
+  def create_season(event_ids, season_name, previous_season = nil)
     ActiveRecord::Base.transaction do
-      ranking = Ranking.create!(name: season_name)
+      ranking = Ranking.create!(name: season_name, previous_season_id: previous_season)
       TierList.create(ranking: ranking,
         ss_min: 9999,
         ss_coef: 1.5,
