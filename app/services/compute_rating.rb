@@ -47,7 +47,6 @@ class ComputeRating < BaseService
         params['ranking_id'] = @ranking.id
         params['deviation'] = BigDecimal(25 / 3)
         rating = Rating.create!(params.merge({base: true}))
-        puts rating.inspect
       end
     end
     rating || Rating.create!(player_id: player_id, match_id: match_id, ranking_id: @ranking.id, mean: BigDecimal('25'), deviation: BigDecimal(25 / 3), base: true)
