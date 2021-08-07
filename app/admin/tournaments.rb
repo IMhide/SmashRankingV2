@@ -51,12 +51,12 @@ ActiveAdmin.register Tournament do
     end
 
     if resource.event_remote_id.nil?
-      render 'events_list', { resource: resource }
+      render 'events_list', {resource: resource}
     else
-      render 'participants_list', { resource: resource }
+      render 'participants_list', {resource: resource}
     end
 
-    render 'matches_list', { matches: resource.matches } if resource.match_sync.success?
+    render 'matches_list', {matches: resource.matches} if resource.match_sync.success?
   end
 
   sidebar 'Dev informations', only: :show do

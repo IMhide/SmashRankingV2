@@ -15,8 +15,8 @@ module SmashGg
     GRAPHQL
 
     def self.call(slug:)
-      result = GraphClient.query(TournamentQuery, variables: { slug: slug }).original_hash.dig('data', 'tournament',
-                                                                                               'events')
+      result = GraphClient.query(TournamentQuery, variables: {slug: slug}).original_hash.dig('data', 'tournament',
+        'events')
       format(result) unless result.nil?
     end
 

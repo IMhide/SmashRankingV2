@@ -3,10 +3,10 @@ if Rails.env.test?
   Sidekiq::Testing.fake!
 else
   Sidekiq.configure_server do |config|
-    config.redis = { url: "#{ENV.fetch('REDIS_URL')}/#{ENV.fetch('REDIS_DB')}" }
+    config.redis = {url: "#{ENV.fetch("REDIS_URL")}/#{ENV.fetch("REDIS_DB")}"}
   end
 
   Sidekiq.configure_client do |config|
-    config.redis = { url: "#{ENV.fetch('REDIS_URL')}/#{ENV.fetch('REDIS_DB')}" }
+    config.redis = {url: "#{ENV.fetch("REDIS_URL")}/#{ENV.fetch("REDIS_DB")}"}
   end
 end

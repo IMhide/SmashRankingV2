@@ -5,7 +5,7 @@ module SmashGg
   class BaseFinder
     GHTTP = GraphQL::Client::HTTP.new('https://api.smash.gg/gql/alpha') do
       def headers(_context)
-        { Authorization: "Bearer #{ENV['SGG_API_TOKEN']}" }
+        {Authorization: "Bearer #{ENV["SGG_API_TOKEN"]}"}
       end
     end
 

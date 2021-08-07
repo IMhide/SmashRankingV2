@@ -11,7 +11,7 @@ columns do
         end
         column :action do |e|
           link_to 'Choisir cet event', add_event_admin_tournament_path(remote_event_id: e.event_remote_id),
-                  method: :post
+            method: :post
         end
       end
     end

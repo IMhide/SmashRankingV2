@@ -12,7 +12,8 @@ class TierList < ApplicationRecord
 
   belongs_to :ranking, inverse_of: :tier_list
 
-  def format; end
+  def format
+  end
 
   def find_tier(count)
     return :SS if count >= ss_min

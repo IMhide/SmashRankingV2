@@ -38,12 +38,12 @@ module SmashGg
     end
 
     def total_page
-      GraphClient.query(MatchQuery, variables: { event_id: @event_remote_id, page: 1 }).original_hash.dig('data',
-                                                                                                          'event', 'standings', 'pageInfo', 'totalPages')
+      GraphClient.query(MatchQuery, variables: {event_id: @event_remote_id, page: 1}).original_hash.dig('data',
+        'event', 'standings', 'pageInfo', 'totalPages')
     end
 
     def seeds_query(page: 1)
-      format GraphClient.query(MatchQuery, variables: { event_id: @event_remote_id, page: page }).original_hash.dig(
+      format GraphClient.query(MatchQuery, variables: {event_id: @event_remote_id, page: page}).original_hash.dig(
         'data', 'event', 'standings', 'nodes'
       )
     end

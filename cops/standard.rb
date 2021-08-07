@@ -21,7 +21,7 @@ module RuboCop::Cop
         node.arguments.each do |arg|
           get_blocks(arg) do |block|
             # If there are no parentheses around the arguments, then braces
-           # and do-end have different meaning due to how they bind, so we
+            # and do-end have different meaning due to how they bind, so we
             # allow either.
             ignore_node(block)
           end
@@ -63,7 +63,7 @@ module RuboCop::Cop
       end
 
       def message(node)
-        "Prefer `{...}` over `do...end` for single-line blocks."
+        'Prefer `{...}` over `do...end` for single-line blocks.'
       end
 
       def autocorrect(corrector, node)
@@ -82,10 +82,10 @@ module RuboCop::Cop
         b = loc.begin
         e = loc.end
 
-        corrector.insert_after(b, " ") unless whitespace_after?(b, 2)
+        corrector.insert_after(b, ' ') unless whitespace_after?(b, 2)
 
-        corrector.replace(b, "{")
-        corrector.replace(e, "}")
+        corrector.replace(b, '{')
+        corrector.replace(e, '}')
       end
 
       def whitespace_after?(range, length = 1)
@@ -93,4 +93,4 @@ module RuboCop::Cop
       end
     end
   end
-end 
+end

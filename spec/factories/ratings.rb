@@ -4,7 +4,7 @@ FactoryBot.define do
     rankings { nil }
     players { nil }
     base { false }
-    mean { "9.99" }
-    deviation { "9.99" }
+    mean { '9.99' }
+    deviation { '9.99' }
   end
 end

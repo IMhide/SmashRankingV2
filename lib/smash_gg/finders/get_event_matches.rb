@@ -57,19 +57,19 @@ module SmashGg
     end
 
     def total_page
-      GraphClient.query(MatchQuery, variables: { event_id: @event_remote_id, page: 1, group_phase_id: de_phases_ids }).original_hash.dig(
+      GraphClient.query(MatchQuery, variables: {event_id: @event_remote_id, page: 1, group_phase_id: de_phases_ids}).original_hash.dig(
         'data', 'event', 'sets', 'pageInfo', 'totalPages'
       )
     end
 
     def matches_query(page: 1)
-      results = GraphClient.query(MatchQuery, variables: { event_id: @event_remote_id, page: page, group_phase_id: de_phases_ids }).original_hash.dig(
+      results = GraphClient.query(MatchQuery, variables: {event_id: @event_remote_id, page: page, group_phase_id: de_phases_ids}).original_hash.dig(
         'data', 'event', 'sets', 'nodes'
       )
     end
 
     def de_phases_ids
-      @result ||= GraphClient.query(PhaseGroupQuery, variables: { event_id: @event_remote_id }).original_hash.dig(
+      @result ||= GraphClient.query(PhaseGroupQuery, variables: {event_id: @event_remote_id}).original_hash.dig(
         'data', 'event', 'phaseGroups'
       ).select do |b|
                     b['bracketType'] == 'DOUBLE_ELIMINATION'
