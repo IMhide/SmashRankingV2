@@ -39,11 +39,16 @@ class ComputeRating < BaseService
   def player_rating(player_id, match_id)
     rating = Rating.where(player_id: player_id, ranking_id: @ranking.id).order(created_at: :desc).first
 
-    if !@ranking.previous_season_id.nil?
-      params = Rating.where(player_id: player_id, ranking_id: @ranking.previous_season_id).order(created_at: :desc).first.attributes
-      params['ranking_id'] = @ranking.id
-      params['deviation'] = BigDecimal(25 / 3)
-      rating = Rating.create!(params.merge({base: true}))
+    if rating.nil? && !@ranking.previous_season_id.nil?
+      previous_rating = Rating.where(player_id: player_id, ranking_id: @ranking.previous_season_id).order(created_at: :desc).first
+      if !previous_rating.nil?
+        params = previous_rating.attributes
+        params['id'] = nil
+        params['ranking_id'] = @ranking.id
+        params['deviation'] = BigDecimal(25 / 3)
+        rating = Rating.create!(params.merge({base: true}))
+        puts rating.inspect
+      end
     end
     rating || Rating.create!(player_id: player_id, match_id: match_id, ranking_id: @ranking.id, mean: BigDecimal('25'), deviation: BigDecimal(25 / 3), base: true)
   end
