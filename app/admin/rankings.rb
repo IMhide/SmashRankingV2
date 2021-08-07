@@ -11,7 +11,18 @@ ActiveAdmin.register Ranking do
     end
   end
 
+  index do
+    id_column
+    column :name
+    actions
+  end
+
   show do
+    attributes_table do
+      row :compute_state do |t|
+        status_tag(t.compute_state, class: t.sync_status_tag_class)
+      end
+    end
     columns do
       column do
         panel 'Tournois' do

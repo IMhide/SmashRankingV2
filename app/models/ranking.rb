@@ -15,9 +15,15 @@ class Ranking < ApplicationRecord
   enumerize :compute_state, in: %i[not_started running success failure], default: :not_started
 
   def formated_standing
-    return [] if standing.nil?
-    standing.map do |player|
+    (standing || []).map do |player|
       StandingStruct.new(player['position'], player['name'], player['score'], player['match_count'])
     end
+  end
+
+  def sync_status_tag_class
+    {
+      failure: 'no',
+      success: 'yes'
+    }.with_indifferent_access[compute_state]
   end
 end
