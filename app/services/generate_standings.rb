@@ -12,7 +12,11 @@ class GenerateStandings < BaseService
   private
 
   def sql_call
-    sql = 'SELECT player_id, ranking_id, MAX(created_at) as created_at, COUNT(created_at) as match_count FROM ratings GROUP BY player_id, ranking_id'
+    sql = "SELECT ratings.player_id, ratings.ranking_id, MAX(ratings.created_at) as created_at, COUNT(ratings.created_at) as match_count, COUNT(DISTINCT(matches.tournament_id)) as tournament_count \
+    FROM ratings \
+    INNER JOIN matches ON ratings.match_id = matches.id \
+    GROUP BY player_id, ranking_id"
+
     sqlq = "SELECT ratings.mean, ratings.deviation, players.id, players.name, players.team, match_count\
     FROM (#{sql}) AS lastest_ratings\
     INNER JOIN ratings ON lastest_ratings.player_id = ratings.player_id AND lastest_ratings.created_at = ratings.created_at\
