@@ -45,6 +45,7 @@ ActiveAdmin.register Ranking do
             column :name
             column :score
             column :match_count
+            column :tournament_count
           end
         end
       end
