@@ -43,7 +43,7 @@ class GenerateStandings < BaseService
   end
 
   def compute_eligibility(tournament_count:, match_count:, is_foreigner:)
-    (is_foreigner && tournament_count.to_i >= 6) || (tournament_count >= 3 && match_count >= 12)
+    (is_foreigner && tournament_count.to_i >= 6) || (tournament_count.to_i >= 3 && match_count.to_i >= 12)
   end
 
   def add_position(result, temporary: false)
