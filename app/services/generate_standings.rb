@@ -6,7 +6,7 @@ class GenerateStandings < BaseService
   def call
     @result = sql_call
 
-    result = set_score
+    set_score
     @ranking.update(
       tmp_standing: add_position(@result),
       standing: add_position(@result.select { |rank| rank[:placement] })
