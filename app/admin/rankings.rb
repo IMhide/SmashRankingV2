@@ -44,8 +44,8 @@ ActiveAdmin.register Ranking do
             column :position
             column :name
             column :score
-            column :match_count
-            column :tournament_count
+            column :placement
+            column :foreigner
           end
         end
       end

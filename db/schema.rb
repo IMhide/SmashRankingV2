@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_26_131319) do
+ActiveRecord::Schema.define(version: 2021_10_03_125346) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,6 +84,7 @@ ActiveRecord::Schema.define(version: 2021_09_26_131319) do
     t.string "compute_state"
     t.jsonb "standing"
     t.bigint "previous_season_id"
+    t.jsonb "tmp_standing"
     t.index ["previous_season_id"], name: "index_rankings_on_previous_season_id"
   end
 

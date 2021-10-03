@@ -1,5 +1,5 @@
 class Ranking < ApplicationRecord
-  StandingStruct = Struct.new(:position, :name, :score, :match_count, :tournament_count)
+  StandingStruct = Struct.new(:position, :name, :score, :placement, :foreigner)
   extend Enumerize
 
   validates :name, presence: true
@@ -16,7 +16,13 @@ class Ranking < ApplicationRecord
 
   def formated_standing
     (standing || []).map do |player|
-      StandingStruct.new(player['position'], player['name'], player['score'], player['match_count'], player['tournament_count'])
+      StandingStruct.new(player['position'], player['name'], player['score'], player['placement'], player['foreigner'])
+    end
+  end
+
+  def formated_tmp_standing
+    (tmp_standing || []).map do |player|
+      StandingStruct.new(player['position'], player['name'], player['score'], player['placement'], player['foreigner'])
     end
   end
 
