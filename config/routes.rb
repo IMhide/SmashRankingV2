@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   root 'ranking#index'
 
   namespace :v1 do
-    resources :rankings, only: [:index, :show]
+    resources :rankings, only: [:index, :show] do
+      resources :player, only: :show, module: :rankings
+    end
   end
 end
