@@ -19,7 +19,7 @@ class GenerateStandings < BaseService
     sql = "SELECT ratings.player_id, ratings.ranking_id, MAX(ratings.created_at) as created_at, COUNT(ratings.created_at) as match_count, COUNT(DISTINCT(matches.tournament_id)) as tournament_count \
     FROM ratings \
     INNER JOIN matches ON ratings.match_id = matches.id \
-    WHERE ratings.base = false \
+    WHERE ratings.base = false AND ranking_id = #{@ranking.id}\
     GROUP BY player_id, ranking_id"
 
     sqlq = "SELECT ratings.mean, ratings.deviation, players.id, players.name, players.team, players.foreigner, match_count, tournament_count\
