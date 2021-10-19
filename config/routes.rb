@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   namespace :v1 do
     resources :rankings, only: [:index, :show] do
       resources :player, only: :show, module: :rankings
+      resources :tournaments, only: :index, module: :rankings
     end
   end
 end
