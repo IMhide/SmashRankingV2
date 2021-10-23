@@ -20,6 +20,17 @@ class Tournament < ApplicationRecord
   end
 
   def matches_for(player:)
-    matches.where(winner: player).or(matches.where(looser: player))
+    @all_matches ||= matches.where(winner: player).or(matches.where(looser: player))
+  end
+
+  def match_count_for(player:)
+    all_matches = matches_for(player: player)
+    matches_won = all_matches.count { |m| m.winner_id == player.id }
+    matches_lost = all_matches.count { |m| m.looser_id == player.id }
+    "#{matches_won} - #{matches_lost}"
+  end
+
+  def get_last_rating_for(player:)
+    matches_for(player: player).order(completed_at: :desc).first.ratings.find_by(player: player)
   end
 end

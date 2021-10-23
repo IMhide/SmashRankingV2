@@ -12,7 +12,8 @@ class Player < ApplicationRecord
     [team, name].compact.join(' | ')
   end
 
-  def previous_tournament_for(ranking_id:, tournament:)
-    tournaments.where('tournaments.ranking_id = ? AND dated_at < ?', ranking_id, tournament.dated_at).order(dated_at: :desc).first
+  def previous_tournament_for(ranking:, tournament:)
+    tournaments.where('tournaments.ranking_id = ? AND dated_at < ?', ranking.id,
+      tournament.dated_at).order(dated_at: :desc).first
   end
 end
