@@ -18,4 +18,8 @@ class Tournament < ApplicationRecord
       success: 'yes'
     }.with_indifferent_access[match_sync]
   end
+
+  def matches_for(player:)
+    matches.where(winner: player).or(matches.where(looser: player))
+  end
 end
