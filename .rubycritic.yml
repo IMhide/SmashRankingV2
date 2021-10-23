@@ -1,0 +1,13 @@
+path: 'notations/rubycritic'
+formats:
+    - html
+paths:
+    - app/components
+    - app/controllers
+    - app/helpers
+    - app/jobs
+    - app/mailers
+    - app/services
+    - app/state_machines
+    - app/uploaders
+    - lib/tasks
