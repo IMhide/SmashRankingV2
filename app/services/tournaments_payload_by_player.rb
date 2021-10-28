@@ -33,8 +33,7 @@ class TournamentsPayloadByPlayer < BaseService
     previous_tournament = @player.previous_tournament_for(ranking: @ranking, tournament: tournament)
 
     if previous_tournament.nil?
-      Rating.find_by(ranking: @ranking, base: true) ||
-        Rating.new(mean: BigDecimal('25'), deviation: BigDecimal(25 / 3))
+      Rating.new(mean: 0, deviation: 0)
     else
       previous_tournament.get_last_rating_for(player: @player)
     end
