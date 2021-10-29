@@ -4,7 +4,7 @@ class CreateTournamentBySlug < BaseService
   end
 
   def call
-    remote_informations = SmashGg::GetFinishedTournamentBySlug.call(slug: @tournament.slug)
+    remote_informations = SmashGg::Finders::GetFinishedTournamentBySlug.call(slug: @tournament.slug)
     if remote_informations.empty?
       false
     else

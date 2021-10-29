@@ -1,7 +1,7 @@
 columns do
   column do
     panel 'Events disponible' do
-      table_for SmashGg::GetEventsByTournamentId.call(slug: resource.slug) do
+      table_for SmashGg::Finders::GetEventsByTournamentId.call(slug: resource.slug) do
         column :name
         column "Nombre d'inscrit" do |e|
           e.participants_count
