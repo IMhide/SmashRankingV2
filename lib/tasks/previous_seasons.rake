@@ -50,7 +50,7 @@ namespace :previous_seasons do
         c_coef: 0.8)
 
       event_ids.each do |event_id|
-        remote_tournament = SmashGg::GetTournamentByEventId.call(event_id: event_id)
+        remote_tournament = SmashGg::Finders::GetTournamentByEventId.call(event_id: event_id)
         tournament = Tournament.create!(name: remote_tournament.name,
           slug: remote_tournament.slug.split('/').last,
           tournament_remote_id: remote_tournament.id,
