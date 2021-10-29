@@ -1,8 +1,8 @@
 GIT
-  remote: git@github.com:CapSens/light_admin.git
-  revision: a287d1fc9a5109a1f86d08f5aebc4303e217ac9f
+  remote: https://github.com/CapSens/light_admin.git
+  revision: 087cb9d0e2ac1d12912df61da2a063ddbc18d93a
   specs:
-    light_admin (1.0.5)
+    light_admin (1.0.6)
       activeadmin (>= 1.1.0, < 3.0)
 
 GIT
