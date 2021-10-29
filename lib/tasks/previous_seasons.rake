@@ -21,7 +21,7 @@ namespace :previous_seasons do
       '357251', '368911', '337699', '353692', '344190',
       '365283', '334558', '362237', '352866', '359547',
       '343932', '347376', '345256', '356620']
-    create_season(events_remote_ids, 'Saison 2', 1)
+    create_season(events_remote_ids, 'Saison 2', 3)
   end
 
   task season_three: :environment do
@@ -31,7 +31,7 @@ namespace :previous_seasons do
       589713, 588537, 578460, 575566, 586817,
       588177, 536547, 579000, 581740, 578998,
       582125, 581400, 574441, 574423]
-    create_season(events_remote_ids, 'Saison 3', 2)
+    create_season(events_remote_ids, 'Saison 3', 4)
   end
 
   def create_season(event_ids, season_name, previous_season = nil)
