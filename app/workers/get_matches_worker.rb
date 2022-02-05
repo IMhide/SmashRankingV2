@@ -18,9 +18,17 @@ class GetMatchesWorker
     remote_matches = SmashGg::Finders::GetEventMatches.new(event_remote_id: remote_event_id).call
     remote_matches.each do |remote_match|
       match_params = extract_result(remote_match)
+      if match_params[:looser_score].to_i == -1
+        dq_fallback(match_params)
+        next
+      end
       next if [match_params[:winner_score], match_params[:looser_score]].include?(nil)
       Match.create!(match_params)
     end
+  end
+
+  def dq_fallback(match_params)
+    Participation.where(tournament: @tournament, player_id: match_params[:looser_id]).update({dq: true})
   end
 
   def extract_result(match)
