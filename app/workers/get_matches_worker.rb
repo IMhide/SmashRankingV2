@@ -25,10 +25,7 @@ class GetMatchesWorker
       next if [match_params[:winner_score], match_params[:looser_score]].include?(nil)
       Match.create!(match_params)
     end
-  end
-
-  def dq_fallback(match_params)
-    Participation.where(tournament: @tournament, player_id: match_params[:looser_id]).update({dq: true})
+    set_tier
   end
 
   def extract_result(match)
@@ -43,6 +40,15 @@ class GetMatchesWorker
       tournament_id: @tournament.id,
       completed_at: Time.at(match['completedAt'])
     }
+  end
+
+  def set_tier
+    tier = @tournament.ranking.tier_list.find_tier(@tournament.participations.where(dq: false).count)
+    @tournament.update(tier: tier)
+  end
+
+  def dq_fallback(match_params)
+    Participation.where(tournament: @tournament, player_id: match_params[:looser_id]).update({dq: true})
   end
 
   def slot_player_remote_id(slot)
