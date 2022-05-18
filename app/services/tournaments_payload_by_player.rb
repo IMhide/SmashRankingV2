@@ -8,11 +8,13 @@ class TournamentsPayloadByPlayer < BaseService
     @player.tournaments.includes(:participations).where(ranking: @ranking).order(dated_at: :desc).map do |tournament|
       player_participation = tournament.participations.where(player: @player).first
       current_rating = tournament.get_last_rating_for(player: @player)
+      next if current_rating.nil?
       previous_rating = previous_rating_for(tournament: tournament)
+
 
       payload_for(tournament: tournament, participation: player_participation,
         score_diff: current_rating.score - previous_rating.score)
-    end
+    end.compact
   end
 
   private

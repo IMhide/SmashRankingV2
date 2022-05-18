@@ -31,6 +31,11 @@ class Tournament < ApplicationRecord
   end
 
   def get_last_rating_for(player:)
-    matches_for(player: player).order(completed_at: :desc).first.ratings.find_by(player: player)
+    last_match = matches_for(player: player).order(completed_at: :desc).first
+    if last_match.nil?
+      nil
+    else
+      last_match.ratings.find_by(player: player)
+    end
   end
 end

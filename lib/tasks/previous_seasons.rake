@@ -34,6 +34,13 @@ namespace :previous_seasons do
     create_season(events_remote_ids, 'Saison 3', 3)
   end
 
+  task season_four: :environment do 
+    events_remote_ids = ["585946", "688598", "673669", "668091", "653227",
+                         "690532", "674355", "682301", "676380", "682166",
+                         "670727", "671495"]
+    create_season(events_remote_ids, 'Saison 4', 4)
+  end
+
   def create_season(event_ids, season_name, previous_season = nil)
     ActiveRecord::Base.transaction do
       ranking = Ranking.create!(name: season_name, previous_season_id: previous_season)
