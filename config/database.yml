@@ -13,8 +13,7 @@ development: &dev
   database: ranking_v2_dev
   host: localhost
   port: 5432
-  username: sam
-  password: samsamsam
+  username: postgres
 
 test:
   <<: *dev

@@ -3,6 +3,9 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.1.1'
 
+gem 'importmap-rails'
+gem 'stimulus-rails'
+gem 'turbo-rails'
 gem 'activeadmin'
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'devise'
@@ -16,7 +19,6 @@ gem 'rails', '~> 7.0.3.1'
 gem 'sass-rails', '>= 6'
 gem 'sidekiq'
 gem 'trueskill', github: 'saulabs/trueskill', require: 'saulabs/trueskill'
-gem 'webpacker', '~> 5.0'
 gem 'rack-cors'
 
 group :development, :test do
@@ -47,3 +49,6 @@ group :test do
   gem 'database_cleaner'
   gem 'rspec-rails'
 end
+
+# Use Redis for Action Cable
+gem "redis", "~> 4.0"

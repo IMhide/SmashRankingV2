@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[6.1].define(version: 2021_10_03_125346) do
-
+ActiveRecord::Schema[7.0].define(version: 2022_07_20_151840) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -22,8 +21,8 @@ ActiveRecord::Schema[6.1].define(version: 2021_10_03_125346) do
     t.bigint "resource_id"
     t.string "author_type"
     t.bigint "author_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author"
     t.index ["namespace"], name: "index_active_admin_comments_on_namespace"
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource"
@@ -33,10 +32,10 @@ ActiveRecord::Schema[6.1].define(version: 2021_10_03_125346) do
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "reset_password_sent_at", precision: nil
+    t.datetime "remember_created_at", precision: nil
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["email"], name: "index_admin_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
@@ -47,9 +46,9 @@ ActiveRecord::Schema[6.1].define(version: 2021_10_03_125346) do
     t.bigint "tournament_id", null: false
     t.integer "winner_score"
     t.integer "looser_score"
-    t.datetime "completed_at"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "completed_at", precision: nil
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["looser_id"], name: "index_matches_on_looser_id"
     t.index ["tournament_id"], name: "index_matches_on_tournament_id"
     t.index ["winner_id"], name: "index_matches_on_winner_id"
@@ -62,8 +61,8 @@ ActiveRecord::Schema[6.1].define(version: 2021_10_03_125346) do
     t.integer "seed", null: false
     t.boolean "verified"
     t.boolean "dq"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["player_id"], name: "index_participations_on_player_id"
     t.index ["tournament_id"], name: "index_participations_on_tournament_id"
   end
@@ -72,15 +71,15 @@ ActiveRecord::Schema[6.1].define(version: 2021_10_03_125346) do
     t.string "name", null: false
     t.string "team"
     t.string "remote_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.boolean "foreigner", default: false, null: false
   end
 
   create_table "rankings", force: :cascade do |t|
     t.string "name", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "compute_state"
     t.jsonb "standing"
     t.bigint "previous_season_id"
@@ -95,8 +94,8 @@ ActiveRecord::Schema[6.1].define(version: 2021_10_03_125346) do
     t.boolean "base", default: false, null: false
     t.decimal "mean", precision: 6, scale: 4, null: false
     t.decimal "deviation", precision: 6, scale: 4, null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["match_id"], name: "index_ratings_on_match_id"
     t.index ["player_id"], name: "index_ratings_on_player_id"
     t.index ["ranking_id"], name: "index_ratings_on_ranking_id"
@@ -114,8 +113,8 @@ ActiveRecord::Schema[6.1].define(version: 2021_10_03_125346) do
     t.integer "c_min", null: false
     t.float "c_coef", null: false
     t.bigint "ranking_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["ranking_id"], name: "index_tier_lists_on_ranking_id"
   end
 
@@ -126,9 +125,9 @@ ActiveRecord::Schema[6.1].define(version: 2021_10_03_125346) do
     t.string "event_remote_id"
     t.integer "remote_participant_count"
     t.bigint "ranking_id"
-    t.datetime "dated_at"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "dated_at", precision: nil
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "match_sync"
     t.string "tier"
     t.index ["ranking_id"], name: "index_tournaments_on_ranking_id"
