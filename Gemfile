@@ -20,6 +20,7 @@ gem 'sass-rails', '>= 6'
 gem 'sidekiq'
 gem 'trueskill', github: 'saulabs/trueskill', require: 'saulabs/trueskill'
 gem 'rack-cors'
+gem 'view_component'
 
 group :development, :test do
   gem 'brakeman'
