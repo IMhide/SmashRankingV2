@@ -13,6 +13,8 @@ SimpleCov.start do
   add_filter '/spec/'
   add_group 'Models', 'app/models'
   add_group 'Controllers', 'app/controllers'
+  add_group 'Services', 'app/services'
+  add_group 'Worker', 'app/workers'
 end
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
