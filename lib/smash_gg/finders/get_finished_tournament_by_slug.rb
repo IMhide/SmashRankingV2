@@ -21,8 +21,10 @@ module SmashGg
       # {"name"=> String, "tournament_remote_id"=> INT:SGGID, "dated_at"=> DateTime}
       def self.format(hash)
         if hash['state'] != 3
+          puts "NNO NO NoN NO NO"
           {}
         else
+          puts "OUAIS OUAIS OUAIS"
           new_hash = hash.dup
           new_hash[:tournament_remote_id] = new_hash.delete('id')
           new_hash[:dated_at] = Time.at(new_hash.delete('startAt')).to_datetime
