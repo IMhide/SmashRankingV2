@@ -15,6 +15,8 @@ SimpleCov.start do
   add_group 'Controllers', 'app/controllers'
   add_group 'Services', 'app/services'
   add_group 'Worker', 'app/workers'
+  add_group 'Libaries', 'lib'
+  add_group 'Tasks', 'lib/tasks'
 end
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
