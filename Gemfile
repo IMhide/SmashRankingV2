@@ -34,6 +34,7 @@ group :development, :test do
   gem 'rubocop-performance', require: false
   gem 'rubycritic', require: false
   gem 'simplecov'
+  gem 'faker'
 end
 
 group :development do
