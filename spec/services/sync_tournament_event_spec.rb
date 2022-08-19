@@ -23,7 +23,7 @@ RSpec.describe SyncTournamentEvent, type: :service do
       end
 
       it 'creates participations' do
-        expect {subject}.to change(Participation, :count).by(5)
+        expect {subject}.to change(Participation, :count).by(6)
       end
 
       it 'creates new Player when not on DB'
