@@ -26,9 +26,18 @@ RSpec.describe SyncTournamentEvent, type: :service do
         expect {subject}.to change(Participation, :count).by(6)
       end
 
-      it 'creates new Player when not on DB'
-      it 'doesn\'t creates new Player is in DB'
-      it 'links participation to Player'
+      it 'creates new Player when not on DB' do
+        expect {subject}.to change(Player, :count).by(6)
+      end
+
+      it 'doesn\'t creates new Player is in DB' do
+        FactoryBot.create(:player, remote_id: 222927) 
+        expect {subject}.to change(Player, :count).by(5)
+      end
+      it 'links participation to Player' do
+        mk = FactoryBot.create(:player, remote_id: 222927) 
+        expect {subject}.to change(mk.participations, :count).by(1)
+      end
       it 'launches GetMatchesWorker'
     end
   end
