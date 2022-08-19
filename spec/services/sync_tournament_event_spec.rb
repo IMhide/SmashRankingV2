@@ -5,9 +5,10 @@ RSpec.describe SyncTournamentEvent, type: :service do
     end
 
     context 'with valid :remote_event_id' do
-      subject { described_class.new(tournament: FactoryBot.create(:tournament), remote_event_id: remote_event_id).call }
+      subject { described_class.new(tournament: tournament, remote_event_id: remote_event_id).call }
 
       let(:remote_event_id) { 400198 }
+      let (:tournament) { FactoryBot.create(:tournament)}
       let(:finder_result) { [
         {:placement=>1, :seed=>1, :player_id=>222927, :player_name=>"MkLeo", :player_team=>"T1", :dq=>nil, :verified=>true},
         {:placement=>2, :seed=>9, :player_id=>6122, :player_name=>"Glutonny", :player_team=>"Solary", :dq=>nil, :verified=>true},
@@ -34,11 +35,18 @@ RSpec.describe SyncTournamentEvent, type: :service do
         FactoryBot.create(:player, remote_id: 222927) 
         expect {subject}.to change(Player, :count).by(5)
       end
+
+      # This is a bad test, it releave that we need more abstraction at this point
       it 'links participation to Player' do
         mk = FactoryBot.create(:player, remote_id: 222927) 
         expect {subject}.to change(mk.participations, :count).by(1)
       end
-      it 'launches GetMatchesWorker'
+      # !BADTEST  
+      
+      it 'launches GetMatchesWorker' do
+        expect(GetMatchesWorker).to receive(:perform_async).with(tournament.id, remote_event_id)
+        subject
+      end
     end
   end
 end
