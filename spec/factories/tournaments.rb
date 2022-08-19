@@ -1,5 +1,6 @@
 FactoryBot.define do
   factory :tournament do
+    ranking {create(:ranking)}
     name { Faker::Esport.event }
     slug { Faker::Internet.domain_word }
     tournament_remote_id { 'TournamentRemoteId' }
