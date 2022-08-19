@@ -1,5 +1,9 @@
-require 'rails_helper'
-
 RSpec.describe Player, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe '#display_name' do
+    subject { FactoryBot.build(:player, name: name, team: team).display_name }
+    let(:name) { 'Oryon' }
+    let(:team) { 'OPL' }
+
+    it {expect(subject).to eq("#{team} | #{name}")}
+  end
 end
