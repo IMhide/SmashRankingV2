@@ -19,6 +19,7 @@ gem 'trueskill', github: 'saulabs/trueskill', require: 'saulabs/trueskill'
 gem 'rack-cors'
 gem 'turbo-rails'
 gem 'stimulus-rails'
+gem 'bootstrap', '~> 5.2.2'
 
 group :development, :test do
   gem 'brakeman'
@@ -49,4 +50,4 @@ group :test do
   gem 'rspec-rails'
 end
 
-gem "importmap-rails", "~> 1.1"
+gem 'importmap-rails', '~> 1.1'
