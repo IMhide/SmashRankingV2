@@ -19,6 +19,12 @@ module SmashRankingV2
     config.autoload_paths << Rails.root.join('lib')
     config.eager_load_paths << Rails.root.join('lib')
 
+    # ViewComponent
+    config.view_component.generate_stimulus_controller = true
+    config.view_component.generate_locale = true
+    config.view_component.generate.sidecar = true
+    config.view_component.component_parent_class = 'BaseComponent'
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
