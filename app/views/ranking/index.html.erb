@@ -1,2 +1,23 @@
-<h1>Ranking#index</h1>
-<p>Find me in app/views/ranking/index.html.erb</p>
+<div class='row'>
+  <div class='col'>
+    <%= form_with url: '', method: :get do |form| %>
+      <%= form.search_field :query, { oninput: 'this.form.requestSubmit()' } %>
+    <% end %>
+  </div>
+</div>
+<div class='row'>
+  <div class='col'>
+    <table class="table table-hover">
+      <thead>
+        <th>Rank</th>
+        <th>Player</th>
+        <th>Score</th>
+      </thead>
+      <tbody> 
+        <%= turbo_frame_tag "employees" do %>
+          <%= render RankListComponent.new(ranking: @ranking) %>
+        <% end %>
+      </tbody> 
+    </table>
+  </div>
+</div>
