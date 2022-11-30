@@ -1,5 +1,11 @@
-<%= render RankSearchComponent.new %>
-<%= render RankHeaderComponent.new %>
-<%= turbo_frame_tag 'rankings' do %>
-  <%= render RankListComponent.new(ranking: @ranking) %>
-<% end %>
+<div class='row'>
+  <div class="col col-7 offset-1">
+    <div class='row py-3'>
+      <%= render RankSearchComponent.new %>
+    </div>
+      <%= render RankHeaderComponent.new %>
+      <%= turbo_frame_tag 'rankings' do %>
+        <%= render RankListComponent.new(ranking: @ranking) %>
+      <% end %>
+  </div>
+</div>

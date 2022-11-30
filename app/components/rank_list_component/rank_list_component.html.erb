@@ -1,5 +1,5 @@
-<% @ranking.each do |rank| %>
-  <div class='row py-3 fs-5 border-bottom border-dark'>
+<% @ranking.each_with_index do |rank, i| %>
+  <div class='row py-3 fs-5 border-bottom border-dark <%= bg_color(i) %>'>
     <div class='col col-1 text-center'><%= rank['position'] %></div>
     <div class='col ps-4'><%= rank['name'] %></div>
     <div class='col col-2'><%= rank['score'] %></div>
