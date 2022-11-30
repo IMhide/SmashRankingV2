@@ -310,6 +310,7 @@ GEM
     rb-fsevent (0.11.2)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
+    redis (4.8.0)
     redis-client (0.11.2)
       connection_pool
     reek (6.1.2)
@@ -476,6 +477,7 @@ DEPENDENCIES
   rack-cors
   rack-mini-profiler (~> 2.0)
   rails (~> 7.0.4)
+  redis (~> 4.0)
   rspec-rails
   rubocop
   rubocop-performance

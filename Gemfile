@@ -52,3 +52,6 @@ group :test do
 end
 
 gem 'importmap-rails', '~> 1.1'
+
+# Use Redis for Action Cable
+gem "redis", "~> 4.0"

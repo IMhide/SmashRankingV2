@@ -1,0 +1,7 @@
+<div class='row'>
+  <div class='col'>
+    <%= form_with url: '', method: :get, data: { turbo_frame: 'rankings' } do |form| %>
+      <%= form.search_field :query, value: params[:query], oninput: 'this.form.requestSubmit()', autofocus: true %>
+    <% end %>
+  </div>
+</div>
