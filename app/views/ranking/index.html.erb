@@ -1,11 +1,18 @@
 <div class='row'>
   <div class="col col-7 offset-1">
     <div class='row py-3'>
-      <%= render RankSearchComponent.new %>
+      <div class="col">
+        <h1> 
+          <%= @ranking.name %>
+        </h1> 
+      </div>
+      <div class="col">
+        <%= render RankSearchComponent.new %>
+      </div>
     </div>
-      <%= render RankHeaderComponent.new %>
-      <%= turbo_frame_tag 'rankings' do %>
-        <%= render RankListComponent.new(ranking: @ranking) %>
-      <% end %>
+    <%= render RankHeaderComponent.new %>
+    <%= turbo_frame_tag 'rankings' do %>
+      <%= render RankListComponent.new(ranking: @ranking, query: @query) %>
+    <% end %>
   </div>
 </div>

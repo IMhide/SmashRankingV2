@@ -1,6 +1,6 @@
 class RankingController < ApplicationController
   def index
-    @ranking = Ranking.last.standing
-    @ranking = @ranking.select { |rank| rank['name'].downcase.include?(params[:query].downcase) } if params[:query]
+    @ranking = Ranking.last
+    @query = params[:query]
   end
 end
