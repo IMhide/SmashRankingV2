@@ -12,7 +12,7 @@
     </div>
     <%= render RankHeaderComponent.new %>
     <%= turbo_frame_tag 'rankings' do %>
-      <%= render RankListComponent.new(ranking: @ranking, query: @query) %>
+      <%= render RankListComponent.new(ranking: @ranking, query: @query, page: @page) %>
     <% end %>
   </div>
 </div>
