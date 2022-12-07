@@ -1,8 +1,8 @@
-<div class='col' >
+<div class='col'>
   <%= form_with url: '', method: :get, data: { turbo_frame: 'rankings' } do |form| %>
     <div class='form-floating'>
-      <%= form.label :query, 'Recherche' %>
-      <%= form.search_field :query, value: params[:query], oninput: 'this.form.requestSubmit()', autofocus: true, class: 'form-control form-control-lg' %>
+      <%= form.search_field :query, value: params[:query], oninput: 'this.form.requestSubmit()', autofocus: true, class: 'form-control' %>
+      <%= form.label :query, 'Rechercher un joueur' %>
     </div>
   <% end %>
 </div>
