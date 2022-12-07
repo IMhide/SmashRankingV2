@@ -14,6 +14,7 @@ gem 'light_admin', github: 'CapSens/light_admin'
 gem 'pg'
 gem 'puma', '~> 5.0'
 gem 'rails', '~> 7.0.4'
+gem 'rails-i18n'
 gem 'sass-rails', '>= 6'
 gem 'sidekiq'
 gem 'trueskill', github: 'saulabs/trueskill', require: 'saulabs/trueskill'
@@ -54,4 +55,4 @@ end
 gem 'importmap-rails', '~> 1.1'
 
 # Use Redis for Action Cable
-gem "redis", "~> 4.0"
+gem 'redis', '~> 4.0'
