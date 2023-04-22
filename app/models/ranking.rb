@@ -14,6 +14,22 @@ class Ranking < ApplicationRecord
 
   enumerize :compute_state, in: %i[not_started running success failure], default: :not_started
 
+  def placement_for(player_id:, tmp: false)
+    if tmp
+      tmp_standing.find { |s| s['id'] == player_id }
+    else
+      standing.find { |s| s['id'] == player_id }
+    end
+  end
+
+  def participant_count(tmp: false)
+    if tmp
+      tmp_standing.size
+    else
+      standing.size
+    end
+  end
+
   def formated_standing
     (standing || []).map do |player|
       StandingStruct.new(player['position'], player['name'], player['score'], player['placement'], player['foreigner'])

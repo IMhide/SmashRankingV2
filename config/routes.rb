@@ -6,7 +6,9 @@ Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   root 'ranking#index'
-  resources :players, only: [:show]
+  resources :players, only: [:show] do
+    resources :rankings, only: [:index, :show], module: :players
+  end
 
   namespace :v1 do
     resources :rankings, only: [:index, :show] do
