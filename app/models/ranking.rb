@@ -1,5 +1,5 @@
 class Ranking < ApplicationRecord
-  StandingStruct = Struct.new(:position, :name, :score, :placement, :foreigner)
+  StandingStruct = Struct.new(:position, :name, :score, :placement, :foreigner, :tmp)
   extend Enumerize
 
   validates :name, presence: true
@@ -15,11 +15,8 @@ class Ranking < ApplicationRecord
   enumerize :compute_state, in: %i[not_started running success failure], default: :not_started
 
   def placement_for(player_id:, tmp: false)
-    if tmp
-      tmp_standing.find { |s| s['id'] == player_id }
-    else
-      standing.find { |s| s['id'] == player_id }
-    end
+    context_standing = tmp ? tmp_standing : standing
+    standing_factory(context_standing.find { |s| s['id'] == player_id }, tmp:)
   end
 
   def participant_count(tmp: false)
@@ -31,15 +28,27 @@ class Ranking < ApplicationRecord
   end
 
   def formated_standing
-    (standing || []).map do |player|
-      StandingStruct.new(player['position'], player['name'], player['score'], player['placement'], player['foreigner'])
+    (standing || []).map do |position|
+      standing_factory(position)
     end
   end
 
   def formated_tmp_standing
-    (tmp_standing || []).map do |player|
-      StandingStruct.new(player['position'], player['name'], player['score'], player['placement'], player['foreigner'])
+    (tmp_standing || []).map do |position|
+      standing_factory(position, tmp: true)
     end
+  end
+
+  def standing_factory(position, tmp: false)
+    return if position.nil?
+    StandingStruct.new(
+      position['position'],
+      position['name'],
+      position['score'],
+      position['placement'],
+      position['foreigner'],
+      tmp
+    )
   end
 
   def sync_status_tag_class
