@@ -2,7 +2,12 @@
   <div class="col col-7">
     <%= turbo_frame_tag 'players_ranking'  do %>
       <div class='row'>
-        
+        <h1><%= @ranking.name %></h1>
+      </div>
+      <div class='row'>
+        <div class="col col-4">
+          <%= render PositionCardComponent.new(placement: @placement, ranking: @ranking) %>
+        </div>
       </div>
     <% end %>
   </div>
