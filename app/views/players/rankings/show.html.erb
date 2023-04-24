@@ -12,7 +12,7 @@
           <%= render WinrateComponent.new(win_count: @match_win.count , lost_count: @match_lost.count) %>
         </div>
         <div class="col col-4">
-          <%= render PositionCardComponent.new(placement: @placement, ranking: @ranking) %>
+          <%= render SetCountComponent.new(match_win: @match_win, match_lost: @match_lost) %>
         </div>
       </div>
     <% end %>
